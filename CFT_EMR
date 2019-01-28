@@ -2,35 +2,35 @@ AWSTemplateFormatVersion: 2010-09-09
 Description: EMR Cluster with Hadoop, Hbase, Spark, Ganglia and Zookeeper
 Parameters:
   EMRClusterName:
-    Description: Name of the cluster
+    Description: myemr
     Type: String
     Default: emrcluster
   KeyName:
-    Description: Must be an existing Keyname
+    Description: my_mac_key_pair
     Type: String
-    Default: mykey
+    Default: my_mac_key_pair
   MasterInstanceType:
-    Description: Instance type to be used for the master instance.
+    Description: m4.large
     Type: String
     Default: m4.large
   CoreInstanceType:
-    Description: Instance type to be used for core instances.
+    Description: my4.large
     Type: String
     Default: m4.large
   NumberOfCoreInstances:
-    Description: Must be a valid number
+    Description: 3
     Type: Number
     Default: 2
   LogUri:
     Description: Must be a valid S3 URL
-    Default: 's3://my-emr-logbucket/'
+    Default: 's3://nasemr/'
     Type: String
   S3DataUri:
-    Description: 'Must be a valid S3 bucket URL '
-    Default: 's3://my-emr/'
+    Description: 's3://nasemr/'
+    Default: 's3://nasemr/'
     Type: String
   ReleaseLabel:
-    Description: Must be a valid EMR release  version
+    Description: emr-5.11.0
     Default: emr-5.11.0
     Type: String
 Resources:
@@ -84,7 +84,7 @@ Resources:
       ServiceRole: !Ref EMRClusterServiceRole
       Tags:
         -
-          Key: "cluster_name"
+          Key: "myemr"
           Value: "master.emr.my.com"
   EMRClusterServiceRole:
     Type: 'AWS::IAM::Role'
