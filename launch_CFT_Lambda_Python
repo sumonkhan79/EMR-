@@ -1,0 +1,11 @@
+def lambda_handler(event, context):
+  import boto3
+  cf_client = boto3.client('cloudformation')
+  cf_client.create_stack(
+      StackName='myemr',
+      TemplateURL='https://s3.amazonaws.com/myinfrabucket/myemr.yaml',
+      Capabilities=[
+        'CAPABILITY_IAM'
+    ]
+  )
+  return 'EMR cloudformation template triggered'
